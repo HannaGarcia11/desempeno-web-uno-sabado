@@ -6,8 +6,6 @@ function mostrarEstadisticas() {
     console.log("Héroe:" + nombreHeroe, "Salud:" + puntosSalud, "Experiencia:" + puntosExperiencia);
 }
 
-//mostrarEstadisticas();
-
 const recibirDanio = function(cantidadDanio) {
     puntosSalud -= cantidadDanio; 
     if(puntosSalud <= 0) {
@@ -20,10 +18,6 @@ const ganarExperiencia = (cantidadExp) => {
     puntosExperiencia += cantidadExp; 
     console.log("¡Ganaste", + cantidadExp + "de experiencia!." + "XP total: " + puntosExperiencia);
 }
-
-//recibirDanio(100);
-//ganarExperiencia(15);
-//mostrarEstadisticas();
 
 const simularBatalla = () => {
     for(let i = 1; i <= 3; i++) {
@@ -63,8 +57,36 @@ function diagnosticoHeroe() {
     }   
 }
 
-simularBatalla();
-diagnosticoHeroe();
+function iniciarAventura () {
+    while(true){
+        let opcion = prompt("Menú de Aventura:\n1 - Luchar contra un monstruo\n2 - Tomar poción de salud\n3 - Completar misión (ganar XP)\n4 - Ver diagnóstico del Héroe\n5 - Mostrar Estadísticas\n6 - Retirarse de la aventura");
+        switch(opcion) {
+            case "1":
+                simularBatalla();
+                break;
+            case "2":
+                puntoRestaurar = parseInt(prompt("¿Cuátos puntos de salud deseas restaurar?"));
+                puntosSalud += puntoRestaurar;
+                break;
+            case "3":
+                xpGanada = parseInt(prompt("¿Cuánta experiencia ganada?"));
+                ganarExperiencia(xpGanada);
+                break;
+            case "4":
+                diagnosticoHeroe();
+                break;
+            case "5":
+                mostrarEstadisticas();
+                break;
+            case "6":
+                console.log("Has decidido retirarte de la aventura. ¡Hasta la próxima!");
+                return;
+            default:
+                console.log("Opción no válida.");
+        }
+    }
+}
+iniciarAventura();
 
 
 
